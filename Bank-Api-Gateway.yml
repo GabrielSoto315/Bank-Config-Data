@@ -33,3 +33,7 @@ spring:
           uri: lb://BANKSAVINGTRANSACTION
           predicates:
             - Path=/api/SavingTransaction/**
+        - id: BankSequenceRedis
+          uri: lb://BANKSEQUENCEREDIS
+          predicates:
+            - Path=/api/sequence/**
