@@ -1,0 +1,35 @@
+server:
+  port: 18882
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: BankClient
+          uri: lb://BANKCLIENT
+          predicates:
+            - Path=/api/ClientCompany/**, /api/ClientPerson/**, /api/Client/**
+        - id: BankCredit
+          uri: lb://BANKCREDIT
+          predicates:
+            - Path=/api/Credit/**
+        - id: BankCreditTransaction
+          uri: lb://BANKCREDITTRANSACTION
+          predicates:
+            - Path=/api/CreditTransaction/**
+        - id: BankSaving
+          uri: lb://BANKSAVING
+          predicates:
+            - Path=/api/Saving/**
+        - id: BankSavingTransaction
+          uri: lb://BANKSAVINGTRANSACTION
+          predicates:
+            - Path=/api/SavingTransaction/**
